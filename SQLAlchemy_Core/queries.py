@@ -96,6 +96,6 @@ def get_user_posts_join():
         result = conn.execute(stmt).fetchall()
         return result
     
-result = get_user_posts_join()
+# result = get_user_posts_join()
 # print(type(result))
-print(result) 
+# print(result) 
