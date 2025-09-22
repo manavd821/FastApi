@@ -1,4 +1,4 @@
-from fastapi import FastAPI, status, HTTPException, Path
+from fastapi import FastAPI, status, HTTPException, Path, Request
 from app.user import services as user_service
 from app.user.schemas import UserBase,UserCreate
 from typing import Annotated, Union
@@ -8,8 +8,24 @@ from pydantic import EmailStr
 app = FastAPI()
 
 @app.get('/')
-async def home():
-    return "Hello"
+async def home(request : Request):
+    if request:
+        return {
+                    "greet" : "Hello",
+                    "Method" : request.method,
+                    "headers" : request.headers,
+                    "cookie" : request.cookies,
+                    "client": request.client,
+                    "base_url":request.base_url,
+                    "path_params": request.path_params,
+                    "query_params":request.query_params,
+                    "receive": request.receive,
+                    # "user": request.user,
+                    "receive": request.receive,
+                    # "session": request.session,
+                    "state": request.state
+                }
+    return "Hello Bhai"
 
 # Create 
 @app.post('/user', status_code=status.HTTP_201_CREATED)
