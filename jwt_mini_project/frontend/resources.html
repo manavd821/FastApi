@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resources</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    button {
+      background: #03dac6;
+      color: #000;
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 200px;
+    }
+    button:hover {
+      background: #018786;
+      color: #fff;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      width: 300px;
+      min-height: 60px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Protected Resources</h2>
+  <button onclick="getResource('resource1')">Resource 1</button>
+  <button onclick="getResource('resource2')">Resource 2</button>
+  <button onclick="getResource('resource3')">Resource 3</button>
+  <button onclick="getResource('resource4')">Resource 4</button>
+
+  <div id="output"></div>
+
+  <script>
+    async function getResource(resource) {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        document.getElementById("output").textContent = "Please login first!";
+        return;
+      }
+
+      const response = await fetch(`http://127.0.0.1:8000/resource/${resource}`, {
+        headers: { "Authorization": "Bearer " + token },
+        method: "GET",
+        credentials: "include"   // <--- required
+
+      });
+
+      const data = await response.json();
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
