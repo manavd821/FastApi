@@ -1,0 +1,53 @@
+services:
+  posgres_db:
+    container_name: postgres_container
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready -U $POSTGRES_USER"]
+      interval: 10s
+      timeout: 10s
+      retries: 5 
+      start_period: 30s
+
+  phpmyadmin:
+    container_name: phpmyadmin_container
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: posgres_db
+      PMA_PORT: 5432
+      POSTGRES_ROOT_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+    depends_on:
+      posgres_db:
+        condition: service_healthy
+
+  fastapi_app:
+    container_name: fastapi_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/fastapi_docker
+    depends_on:
+      posgres_db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
