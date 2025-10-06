@@ -1,0 +1,27 @@
+{
+    "name": "FastAPI Dev Container",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "fastapi_app",
+    "workspaceFolder": "/testing_in_fastapi",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.pythonPath": "/usr/local/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint"
+            ]
+        } 
+    },
+    "postCreateCommand": "pip install -r requirements.txt",
+    "remoteEnv": {
+        "PYTHONUNBUFFERED": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "forwardPorts": [8000, 3306]
+}
+
