@@ -1,0 +1,22 @@
+docker-compose up --build
+
+# open bash in app container if needed -> container should be in running state
+docker exec -it fastapi_container bash
+
+# to run docker container in background inside cli
+docker-compose up -d
+
+# to stop docker container 
+docker-compose down
+
+# to run fastapi app:
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+# fastapi 
+python -m venv venv
+venv\scripts\activate
+pip install "fastapi[standard]" "sqlalchemy[asyncio]" alembic python-decouple aiomysql
+pip freeze > requirements.txt
+alembic init -t async alembic
+alembic revision --autogenerate -m "create table"
+alembic upgrade head

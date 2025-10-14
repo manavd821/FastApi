@@ -1,0 +1,35 @@
+{
+  "name": "FastAPI Dev Container",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "fastapi_app",
+  "workspaceFolder": "/resume_uploader_Project",
+  "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "20"
+        }
+    },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        }
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "forwardPorts": [8000, 5173, 5432, 8080],
+  "postCreateCommand": "pip install -r requirements.txt",
+
+  "remoteEnv": {
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  }
+}

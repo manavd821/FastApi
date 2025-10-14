@@ -1,0 +1,82 @@
+services:
+  postgres_db:
+    container_name: postgres_container3
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 10s
+      retries: 5 
+      start_period: 30s
+
+  pgadmin4:
+    container_name: pgadmin4_container3
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+
+  fastapi_app:
+    container_name: fastapi_container3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/resume_uploader_Project
+
+  frontend:
+    container_name: react_frontend3
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    working_dir: /frontend
+    command: yarn dev --host 0.0.0.0 --port 5173
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/frontend
+    stdin_open: true
+    tty: true
+
+  minio:
+    container_name: minio_container3
+    image: minio/minio:latest
+    restart: always
+    ports:
+      - "9000:9000"   # API
+      - "9001:9001"   # Console (UI)
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_SERVER_URL: "http://localhost:9000"  # ADD THIS LINE
+
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+
+volumes:
+  postgres_data:
+  minio_data:

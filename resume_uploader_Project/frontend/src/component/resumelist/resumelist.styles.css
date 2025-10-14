@@ -1,0 +1,74 @@
+.resume-list-container {
+  max-width: 95%;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+}
+
+/* Table styling */
+.table-container {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.table-container th,
+.table-container td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.table-container th {
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.table-container tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Alternating row color for better readability */
+.table-container tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Links */
+.table-container a {
+  color: #4cc9f0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.table-container a:hover {
+  color: #90e0ef;
+  text-decoration: underline;
+}
+
+/* Empty state */
+.resume-list-container > div {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .table-container {
+    font-size: 0.85rem;
+  }
+
+  .table-container th,
+  .table-container td {
+    padding: 0.5rem 0.75rem;
+  }
+}

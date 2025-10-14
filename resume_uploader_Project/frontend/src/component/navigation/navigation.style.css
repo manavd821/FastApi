@@ -1,0 +1,29 @@
+.navigation-bar {
+  display: flex;
+  gap: 20px;             /* Space between links */
+  padding: 15px 30px;
+  background-color: #1f1f1f;
+  border-bottom: 1px solid #444;
+  position: sticky;       /* Makes nav stick to top */
+  top: 0;
+  z-index: 1000;
+}
+
+/* Nav links */
+.navigation-bar a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.87);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navigation-bar a:hover {
+  color: #00bfff;         /* Highlight on hover */
+}
+
+/* Content area below nav */
+.content {
+  padding: 20px 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
