@@ -1,0 +1,12 @@
+2025-10-21 19:39:29,251 - mylogger - INFO main.py:root:7 - Root endpoint access
+2025-10-21 19:40:59,484 - mylogger - INFO main.py:root:7 - Root endpoint access
+2025-10-21 19:41:22,918 - mylogger - INFO main.py:root:7 - Root endpoint access
+2025-10-21 19:41:22,919 - mylogger - WARNING main.py:root:8 - Root endpoint access warning
+2025-10-21 19:45:02,725 - mylogger - INFO main.py:root:7 - Root endpoint access
+2025-10-21 19:45:02,727 - mylogger - WARNING main.py:root:8 - Root endpoint access warning
+2025-10-21 19:45:12,240 - mylogger - INFO main.py:root:7 - Root endpoint access
+2025-10-21 19:45:12,242 - mylogger - WARNING main.py:root:8 - Root endpoint access warning
+2025-10-21 19:45:18,841 - mylogger - INFO main.py:root:7 - Root endpoint access
+2025-10-21 19:45:18,842 - mylogger - WARNING main.py:root:8 - Root endpoint access warning
+2025-10-21 19:54:46,614 - mylogger - INFO main.py:root:7 - Root endpoint access
+2025-10-21 19:54:46,615 - mylogger - WARNING main.py:root:8 - Root endpoint access warning
